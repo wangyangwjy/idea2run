@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "yog",
+      "name": "idea2run",
       "source": {
         "source": "local",
-        "path": "./plugins/yog"
+        "path": "./plugins/idea2run"
       },
       "policy": {
         "installation": "AVAILABLE",

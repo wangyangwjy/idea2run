@@ -6,9 +6,9 @@ import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { routes, plan, passed } from './fixtures.mjs';
 
-const tool = resolve('plugins/yog/skills/yog/scripts/yog.mjs');
+const tool = resolve('plugins/idea2run/skills/idea2run/scripts/idea2run.mjs');
 test('命令行完成中文空格路径的交接、反馈与导出，并拒绝覆盖', async (context) => {
-  const directory = await mkdtemp(join(tmpdir(), 'yog-测试 with spaces-'));
+  const directory = await mkdtemp(join(tmpdir(), 'idea2run-测试 with spaces-'));
   context.after(() => rm(directory, { recursive: true, force: true }));
   const session = join(directory, '进度.json');
   const json = async (name, value) => { const path = join(directory, name); await writeFile(path, `\uFEFF${JSON.stringify(value)}`); return path; };
@@ -46,14 +46,14 @@ test('命令行完成中文空格路径的交接、反馈与导出，并拒绝�
 });
 
 test('技能安装只写入指定项目，重复安装不覆盖', async (context) => {
-  const directory = await mkdtemp(join(tmpdir(), 'yog-install-'));
+  const directory = await mkdtemp(join(tmpdir(), 'idea2run-install-'));
   context.after(() => rm(directory, { recursive: true, force: true }));
   const installer = resolve('scripts/install-skill.mjs');
   const run = () => spawnSync(process.execPath, [installer, directory], { encoding: 'utf8' });
   assert.equal(run().status, 0);
-  const skill = join(directory, '.agents', 'skills', 'yog', 'SKILL.md');
+  const skill = join(directory, '.agents', 'skills', 'idea2run', 'SKILL.md');
   const original = await readFile(skill, 'utf8');
-  assert.match(original, /name: yog/);
+  assert.match(original, /name: idea2run/);
   assert.equal(run().status, 1);
   assert.equal(await readFile(skill, 'utf8'), original);
 });

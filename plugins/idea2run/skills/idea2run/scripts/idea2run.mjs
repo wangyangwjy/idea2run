@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { createSession, validateSession, transition, status, nextStep, renderPrompt, renderPlan } from './core.mjs';
 
-const HELP = `YOG 本地交接工具（不联网、不执行计划中的命令）
+const HELP = `Idea2Run 本地交接工具（不联网、不执行计划中的命令）
   init <session.json> --idea <想法> [--environment <环境摘要>]
   revise <session.json> <brief.json>
   routes <session.json> <routes.json>
@@ -90,5 +90,5 @@ export async function main(args) {
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import.meta.url))) {
-  main(process.argv.slice(2)).catch((error) => { process.stderr.write(`YOG：${error.message}\n`); process.exitCode = 1; });
+  main(process.argv.slice(2)).catch((error) => { process.stderr.write(`Idea2Run：${error.message}\n`); process.exitCode = 1; });
 }

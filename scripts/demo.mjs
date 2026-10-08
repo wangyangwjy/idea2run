@@ -1,12 +1,12 @@
 import { mkdir, writeFile, mkdtemp } from 'node:fs/promises';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createSession, transition, renderPrompt, renderPlan } from '../plugins/yog/skills/yog/scripts/core.mjs';
+import { createSession, transition, renderPrompt, renderPlan } from '../plugins/idea2run/skills/idea2run/scripts/core.mjs';
 import { routes, plan, passed } from '../tests/fixtures.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-await mkdir(join(root, '.yog'), { recursive: true });
-const directory = await mkdtemp(join(root, '.yog', 'synthetic-demo-'));
+await mkdir(join(root, '.idea2run'), { recursive: true });
+const directory = await mkdtemp(join(root, '.idea2run', 'synthetic-demo-'));
 let session = createSession('合成交接演示：检查输入并记录测试产物', '合成环境，未诊断本机');
 session = transition(session, 'routes', routes);
 session = transition(session, 'select', { id: 'simple' }, true);

@@ -4,19 +4,19 @@
 
 **想法 → 几个方案 → 用户选择 → 执行计划 → 用户确认 → 可选 Agent 交接 → 分步提示词。**
 
-Idea2Run 是一个轻量的对话式插件，插件标识和调用入口沿用 `yog`。首版接入 Codex，使用宿主已有的模型、联网搜索和只读项目工具。推荐不依赖固定项目目录。用户可以自己实施，也可以复制提示词交给当前或其他 Agent。
+Idea2Run 是一个轻量的对话式插件，调用入口为 `$idea2run`。首版接入 Codex，使用宿主已有的模型、联网搜索和只读项目工具。推荐不依赖固定项目目录。用户可以自己实施，也可以复制提示词交给当前或其他 Agent。
 
 ## 最简单的用法
 
 安装完成后，在 Codex 输入框输入 **`$`，选择 Idea2Run**，直接说你的想法即可，例如：
 
 ```text
-$yog 我想做一个本地照片整理工具
+$idea2run 我想做一个本地照片整理工具
 ```
 
-只需在开始时选一次，后续直接回复“选第二个”“可以”“继续”，YOG 会根据上下文引导流程，无需重复长指令。Codex 的技能选择入口使用 `$`；ChatGPT 的选择入口使用 `@`。见 [官方调用说明](https://learn.chatgpt.com/docs/skills-and-plugins)。
+只需在开始时选一次，后续直接回复“选第二个”“可以”“继续”，Idea2Run 会根据上下文引导流程，无需重复长指令。Codex 的技能选择入口使用 `$`；ChatGPT 的选择入口使用 `@`。见 [官方调用说明](https://learn.chatgpt.com/docs/skills-and-plugins)。
 
-安装本地插件后，新开任务加载 YOG。如果当前窗口没有刷新，可以重启应用后再选择。
+安装本地插件后，新开任务加载 Idea2Run。如果当前窗口没有刷新，可以重启应用后再选择。
 
 ## 安装到 Codex
 
@@ -24,10 +24,10 @@ $yog 我想做一个本地照片整理工具
 
 ```powershell
 codex plugin marketplace add wangyangwjy/idea2run
-codex plugin add yog@idea2run
+codex plugin add idea2run@idea2run
 ```
 
-安装后新开任务，输入 `$` 选择 Idea2Run。后续直接说想法和回复即可。宿主也可以根据想法自动选用技能；需要确保调用时用 `$yog`。
+安装后新开任务，输入 `$` 选择 Idea2Run。后续直接说想法和回复即可。宿主也可以根据想法自动选用技能；需要确保调用时用 `$idea2run`。
 
 如果当前 Codex 版本不支持插件命令，可以使用下面的项目内技能安装方式。
 
@@ -42,7 +42,7 @@ npm run setup
 然后在 **项目目录中新开 Codex 对话**，输入 `$` 并选择 Idea2Run，直接说想法：
 
 ```text
-$yog <你的想法>
+$idea2run <你的想法>
 ```
 
 需要在其他项目中使用时，明确目标目录：
@@ -51,23 +51,23 @@ $yog <你的想法>
 node scripts/install-skill.mjs "D:\你的项目"
 ```
 
-安装只在指定项目中复制 `.agents/skills/yog`，不改全局配置、不连接外部服务，也不覆盖已有同名技能。项目内技能发现及插件打包采用 [官方技能机制](https://developers.openai.com/plugins/build/skills) 与 [插件格式](https://developers.openai.com/plugins/build/plugins)。宿主版本和权限可能影响发现方式。
+安装只在指定项目中复制 `.agents/skills/idea2run`，不改全局配置、不连接外部服务，也不覆盖已有同名技能。项目内技能发现及插件打包采用 [官方技能机制](https://developers.openai.com/plugins/build/skills) 与 [插件格式](https://developers.openai.com/plugins/build/plugins)。宿主版本和权限可能影响发现方式。
 
 无需安装也可以直接让 Agent 阅读源技能文件：
 
 ```text
-请读取 <仓库绝对路径>/plugins/yog/skills/yog/SKILL.md，并按它的流程帮我实现这个想法：<你的想法>。
+请读取 <仓库绝对路径>/plugins/idea2run/skills/idea2run/SKILL.md，并按它的流程帮我实现这个想法：<你的想法>。
 ```
 
-开发时优先直接引用源文件，避免已复制的技能副本落后于修改。插件包位于 `plugins/yog/`，已包含便携清单与 Codex 兼容清单。仓库内提供插件列表，可通过上面的命令安装。
+开发时优先直接引用源文件，避免已复制的技能副本落后于修改。插件包位于 `plugins/idea2run/`，已包含便携清单与 Codex 兼容清单。仓库内提供插件列表，可通过上面的命令安装。
 
 ## 用户看到什么
 
-1. 说出想法；YOG 只补问影响选型的关键问题。
+1. 说出想法；Idea2Run 只补问影响选型的关键问题。
 2. 查看几个方案：能做什么、项目链接、推荐理由、环境要求和限制。
-3. 选择方案；YOG 展开该方案的完整执行计划。
+3. 选择方案；Idea2Run 展开该方案的完整执行计划。
 4. 确认计划，决定自己实施或获取 Agent 提示词。
-5. 一次复制一个阶段的提示词；把结果反馈给 YOG，继续或修复当前阶段。
+5. 一次复制一个阶段的提示词；把结果反馈给 Idea2Run，继续或修复当前阶段。
 
 联网搜索由宿主提供；没有搜索工具时会说明限制，请用户提供资料，或把候选保留为待核对。资料核对不等于安装或运行通过。
 
@@ -76,10 +76,10 @@ node scripts/install-skill.mjs "D:\你的项目"
 纯对话即可推荐方案。可选工具需要 Node.js 22+，只保存进度和生成文件，没有第三方依赖，不执行计划中的命令。
 
 ```powershell
-npm run yog -- --help
+npm run idea2run -- --help
 ```
 
-Agent 需要保存进度时按技能的 `references/local-progress.md` 操作。保存内容包括想法、环境摘要、候选、所选方案、计划、确认和结果反馈；默认保存在被 Git 忽略的 `.yog/` 中。
+Agent 需要保存进度时按技能的 `references/local-progress.md` 操作。保存内容包括想法、环境摘要、候选、所选方案、计划、确认和结果反馈；默认保存在被 Git 忽略的 `.idea2run/` 中。
 
 工具区分选型、计划批准、Agent 交接选择和当前阶段授权。计划或方案改变会使旧确认与有效进度失效；失败不会跳到下一阶段。每条提示词最多 2400 个字符，超过时要求拆分或精简。机器信息未知时保持未知。
 
@@ -97,20 +97,20 @@ npm run demo
 
 `check` 检查插件清单、版本一致性、引用、文件编码和脚本语法。
 
-`demo` 使用**合成测试数据**在 `.yog/` 中生成计划与两个阶段的提示词。没有下载、安装或运行任何开源候选，不是真实任务落地证据。测试数据留在 `tests/`，不会打入插件包。
+`demo` 使用**合成测试数据**在 `.idea2run/` 中生成计划与两个阶段的提示词。没有下载、安装或运行任何开源候选，不是真实任务落地证据。测试数据留在 `tests/`，不会打入插件包。
 
 ```text
-plugins/yog/                可分发插件
-  skills/yog/SKILL.md       对话工作流
-  skills/yog/references/    按需读取的交接格式与进度说明
-  skills/yog/scripts/       本地进度和导出工具
+plugins/idea2run/                可分发插件
+  skills/idea2run/SKILL.md       对话工作流
+  skills/idea2run/references/    按需读取的交接格式与进度说明
+  skills/idea2run/scripts/       本地进度和导出工具
 scripts/                   安装、检查与合成演示
 tests/                     流程测试与合成输入
 ```
 
 ## 当前状态与下一步
 
-这是 v0.1.0 早期版本，已实现对话流程、插件安装结构、本地进度、计划导出、当前阶段提示词与反馈处理。宿主提供模型和搜索，无需额外注册账号或接入独立模型接口。
+这是 v0.1.1 早期版本，已实现对话流程、插件安装结构、本地进度、计划导出、当前阶段提示词与反馈处理。宿主提供模型和搜索，无需额外注册账号或接入独立模型接口。
 
 已有一次 Windows Word 文件按内容命名的真实使用记录：用户提出想法、比较方案、确认计划，并授权当前 Agent 完成实现。结果包括预览、重名处理和撤销，在样本副本上完成了验证。目标目录的自动处理仍未开启；这次记录没有验证跨 Agent 复制提示词的完整流程。用户文件与私人会话不放进仓库。
 

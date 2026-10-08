@@ -1,6 +1,7 @@
 node_modules/
+.idea2run/
 .yog/
-/.agents/skills/yog/
+/.agents/skills/idea2run/
 exports/
 coverage/
 *.log

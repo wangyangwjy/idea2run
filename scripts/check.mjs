@@ -5,20 +5,20 @@ import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const plugin = join(root, 'plugins', 'yog');
+const plugin = join(root, 'plugins', 'idea2run');
 const portable = JSON.parse(await readFile(join(plugin, 'plugin.json')));
 const manifest = JSON.parse(await readFile(join(plugin, '.codex-plugin', 'plugin.json')));
 const pkg = JSON.parse(await readFile(join(root, 'package.json')));
-assert.equal(portable.name, 'yog'); assert.equal(manifest.name, portable.name);
+assert.equal(portable.name, 'idea2run'); assert.equal(manifest.name, portable.name);
 assert.equal(manifest.version, pkg.version); assert.equal(portable.version, pkg.version);
 assert.equal(manifest.skills, './skills/');
 assert.ok(!manifest.mcpServers && !manifest.apps, '不要声明不存在的服务');
-const skillRoot = join(plugin, 'skills', 'yog');
+const skillRoot = join(plugin, 'skills', 'idea2run');
 const skill = await readFile(join(skillRoot, 'SKILL.md'), 'utf8');
-assert.match(skill, /^---\r?\nname: yog\r?\ndescription: .+/);
+assert.match(skill, /^---\r?\nname: idea2run\r?\ndescription: .+/);
 assert.ok(skill.split('\n').length <= 120, '核心工作流应保持简短');
 for (const match of skill.matchAll(/\]\((references\/[^)]+)\)/g)) await access(join(skillRoot, match[1]));
-assert.match(await readFile(join(skillRoot, 'agents', 'openai.yaml'), 'utf8'), /\$yog/);
+assert.match(await readFile(join(skillRoot, 'agents', 'openai.yaml'), 'utf8'), /\$idea2run/);
 async function inspect(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = join(directory, entry.name);

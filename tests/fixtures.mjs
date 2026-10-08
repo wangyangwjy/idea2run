@@ -3,7 +3,7 @@ export const routes = [{
   id: 'simple', title: '测试方案', summary: '合成测试用途', reason: '验证交接流程，不代表真实项目推荐',
   requirements: ['环境条件来自测试输入'], caveats: ['合成数据，禁止作为实测证据'],
   repositories: [{
-    url: 'https://github.com/yog-test-fixtures/synthetic', status: 'docs_reviewed', revision: 'test-v1',
+    url: 'https://github.com/idea2run-test-fixtures/synthetic', status: 'docs_reviewed', revision: 'test-v1',
     license: null, licenseSource: null,
     sources: [{ url: 'https://example.com/synthetic-docs', claim: '合成资料，用于测试格式', checkedAt: '2026-10-08T00:00:00Z' }],
   }],

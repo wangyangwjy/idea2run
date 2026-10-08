@@ -1,4 +1,4 @@
 interface:
   display_name: "Idea2Run"
   short_description: "从一个想法寻找开源方案，生成执行计划与简短的分步 Agent 提示词"
-  default_prompt: "使用 $yog 帮我落地这个想法："
+  default_prompt: "使用 $idea2run 帮我落地这个想法："

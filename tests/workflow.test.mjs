@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createSession, transition as update, status, nextStep, renderPrompt, renderPlan, validateRoutes, validatePlan, validateSession, isApproved, PROMPT_LIMIT } from '../plugins/yog/skills/yog/scripts/core.mjs';
+import { createSession, transition as update, status, nextStep, renderPrompt, renderPlan, validateRoutes, validatePlan, validateSession, isApproved, PROMPT_LIMIT } from '../plugins/idea2run/skills/idea2run/scripts/core.mjs';
 import { routes, plan, passed } from './fixtures.mjs';
 
 function planned() {
