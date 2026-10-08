@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "description": "从一个想法寻找开源项目、比较方案，生成计划与分步 Agent 提示词。",
   "author": {
-    "name": "YOG contributors"
+    "name": "wangyangwjy"
   },
   "skills": "./skills/",
   "interface": {
-    "displayName": "YOG · 想法落地",
+    "displayName": "Idea2Run",
     "shortDescription": "找方案，定计划，分步交给 Agent。",
     "longDescription": "提出想法，比较真实开源项目支持的方案；选定后生成执行计划，并按需提供简短的分步 Agent 提示词。",
-    "developerName": "YOG contributors",
+    "developerName": "wangyangwjy",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": ["我想做一个……", "帮我把这个想法落地。"]
-  }
+    "defaultPrompt": [
+      "我想做一个……",
+      "帮我把这个想法落地。"
+    ]
+  },
+  "license": "MIT",
+  "repository": "https://github.com/wangyangwjy/idea2run"
 }

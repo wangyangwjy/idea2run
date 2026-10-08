@@ -1,15 +1,18 @@
 {
-  "name": "yog",
+  "name": "idea2run",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "description": "从想法寻找开源方案，生成计划与分步 Agent 提示词",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "test": "node --test",
     "check": "node scripts/check.mjs",
     "demo": "node scripts/demo.mjs",
     "setup": "node scripts/install-skill.mjs",
     "yog": "node plugins/yog/skills/yog/scripts/yog.mjs"
-  }
+  },
+  "license": "MIT"
 }
