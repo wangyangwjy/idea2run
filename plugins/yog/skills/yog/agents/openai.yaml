@@ -1,0 +1,4 @@
+interface:
+  display_name: "YOG · 想法落地"
+  short_description: "从一个想法寻找开源方案，生成执行计划与简短的分步 Agent 提示词"
+  default_prompt: "使用 $yog 帮我寻找适合这个想法的开源项目，比较方案，选定后生成计划与分步执行提示词。"

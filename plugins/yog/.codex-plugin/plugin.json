@@ -1,0 +1,18 @@
+{
+  "name": "yog",
+  "version": "0.1.0",
+  "description": "从一个想法寻找开源项目、比较方案，生成计划与分步 Agent 提示词。",
+  "author": {
+    "name": "YOG contributors"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "YOG · 想法落地",
+    "shortDescription": "找方案，定计划，分步交给 Agent。",
+    "longDescription": "提出想法，比较真实开源项目支持的方案；选定后生成执行计划，并按需提供简短的分步 Agent 提示词。",
+    "developerName": "YOG contributors",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": ["我有一个想法，帮我找开源项目并比较几个可落地方案。", "根据我选定的方案，生成计划和简短的分步 Agent 提示词。"]
+  }
+}

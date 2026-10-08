@@ -1,0 +1,23 @@
+import { mkdir, writeFile, mkdtemp } from 'node:fs/promises';
+import { join, dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createSession, transition, renderPrompt, renderPlan } from '../plugins/yog/skills/yog/scripts/core.mjs';
+import { routes, plan, passed } from '../tests/fixtures.mjs';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+await mkdir(join(root, '.yog'), { recursive: true });
+const directory = await mkdtemp(join(root, '.yog', 'synthetic-demo-'));
+let session = createSession('合成交接演示：检查输入并记录测试产物', '合成环境，未诊断本机');
+session = transition(session, 'routes', routes);
+session = transition(session, 'select', { id: 'simple' }, true);
+session = transition(session, 'plan', plan);
+session = transition(session, 'approve', {}, true);
+session = transition(session, 'agent', { choice: 'yes' }, true);
+await writeFile(join(directory, '01-prompt.md'), renderPrompt(session));
+session = transition(session, 'result', { id: 'inspect', result: passed('input') });
+session = transition(session, 'authorize', { id: 'configure' }, true);
+await writeFile(join(directory, '02-prompt.md'), renderPrompt(session));
+await writeFile(join(directory, 'plan.md'), renderPlan(session));
+await writeFile(join(directory, 'session.json'), JSON.stringify(session, null, 2));
+console.log(`合成交接演示已生成：${directory}`);
+console.log('演示仅测试计划与提示词交接；未下载、安装或运行任何候选项目，不是真实落地证据。');

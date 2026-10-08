@@ -1,0 +1,8 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "yog",
+  "version": "0.1.0",
+  "description": "从想法寻找开源方案，生成执行计划与简短的分步 Agent 提示词。",
+  "author": { "name": "YOG contributors" },
+  "keywords": ["open-source", "planning", "agent", "idea-to-project"]
+}

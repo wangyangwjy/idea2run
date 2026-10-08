@@ -1,0 +1,11 @@
+node_modules/
+.yog/
+/.agents/skills/yog/
+exports/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
