@@ -13,6 +13,6 @@
     "developerName": "YOG contributors",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": ["我有一个想法，帮我找开源项目并比较几个可落地方案。", "根据我选定的方案，生成计划和简短的分步 Agent 提示词。"]
+    "defaultPrompt": ["我想做一个……", "帮我把这个想法落地。"]
   }
 }
