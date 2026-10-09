@@ -2,63 +2,62 @@
 
 **Turn ideas into working projects.**
 
-Describe an idea, compare open-source approaches, approve a plan, and implement it step by step. Use your existing Codex; Idea2Run adds no account or model API.
+Describe an idea, compare open-source approaches, approve a plan, and implement it step by step. Use your existing Codex, Claude Code, Hermes Agent, OpenClaw, or Pi; Idea2Run adds no account or model API.
 
 [简体中文](README.md) | **English** · [Quick start](#quick-start) · [Updates](#updating-an-existing-installation) · [Development docs](docs/development.en.md)
 
-Current version: **v0.2.4** · [Download the latest version](https://github.com/wangyangwjy/idea2run/releases/latest) · [Changelog](CHANGELOG.en.md)
+Current version: **v0.3.0** · [Download the latest version](https://github.com/wangyangwjy/idea2run/releases/latest) · [Changelog](CHANGELOG.en.md)
 
 ## Quick start
 
-### 1. Choose where to use it
+### 1. Choose your Agent and scope
 
-| What you want | Choose | Available in |
+| Your Agent | Installation option | Start using it |
 | --- | --- | --- |
-| Use it in one project | Project-local installation (default) | The target project and its subdirectories |
-| Use it across projects | Global installation (current user) | This user's projects |
+| Codex | `--agent codex` (default) | `$idea2run your idea` |
+| Claude Code | `--agent claude-code` | `/idea2run your idea` |
+| Hermes Agent | `--agent hermes` | `/idea2run your idea` |
+| OpenClaw | `--agent openclaw` | `/idea2run your idea`, or ask it to use Idea2Run |
+| Pi coding agent | `--agent pi` | `/skill:idea2run your idea` |
+
+**One project**: choose project-local installation (default). **Across projects**: explicitly choose global installation for the current user. For OpenClaw, local means its actual workspace. Hermes project discovery requires a version supporting it, a Git project, and user trust. Discovery scope varies by host; see [compatibility and validation](docs/compatibility.en.md).
 
 ### 2. Install
 
-**Let Codex install it for you.** Open Codex in the project you want to work in, then copy the prompt for your chosen scope:
-
-Project-local installation:
+**Let your current Agent install it.** Open it in the target project or workspace and copy this prompt, filling in your Agent and scope:
 
 ```text
-Install Idea2Run in my current project: https://github.com/wangyangwjy/idea2run . Read the latest README, obtain the latest release, and install into the current project's absolute path. Tell me the version, scope, entry point, and how to start.
-```
-
-Global installation:
-
-```text
-Install Idea2Run globally for my current user: https://github.com/wangyangwjy/idea2run . Read the latest README, obtain the latest release, and use global installation so I can use it across projects. Tell me the version, scope, entry point, and how to start.
+Install Idea2Run: https://github.com/wangyangwjy/idea2run . My Agent is <Codex / Claude Code / Hermes Agent / OpenClaw / Pi>, and my scope is <current project or workspace / global for the current user>. Read the latest README, obtain the latest release, and install in the environment where the host actually runs. Tell me the version, scope, entry point, and first-use instructions.
 ```
 
 <details>
 <summary>Install it yourself: download, extract, run one command</summary>
 
-Requires Codex and Node.js 22+. Download `idea2run-version.zip` from the [latest release](https://github.com/wangyangwjy/idea2run/releases/latest), extract it, and open a terminal in the extracted project folder containing `package.json`. Run the command for your chosen scope:
+Requires an existing Agent and Node.js 22+. Download the full ZIP from the [latest release](https://github.com/wangyangwjy/idea2run/releases/latest), extract it, and open a terminal in the folder containing `package.json`. Choose your Agent and replace the path with your actual working project:
 
 ```powershell
-# Project-local: replace this path with your actual working project
-node scripts/install-skill.mjs "D:\your-project"
+# Example: Claude Code in one project
+node scripts/install-skill.mjs "D:\your-project" --agent claude-code
 
-# Global: available across projects for the current user
-npm run setup -- --global
+# Example: Pi globally for the current user
+npm run setup -- --agent pi --global
 ```
 
-If the extracted directory itself is your working project, you can run `npm run setup` directly. The output shows the version, scope, actual entry point, and first-use example. See [installation instructions](docs/development.en.md#installation-and-updates) for full steps and marketplace installation.
+Codex can omit `--agent codex`. Omitting the target installs into the extracted directory itself; do this only when it is your working project. For WSL, containers, or remote hosts, install inside the actual runtime environment using its paths. The chat client may run on a different computer. Installation does not change host configuration or trust settings.
 
 </details>
 
 ### 3. Start using it
 
-After project-local installation, start a new Codex task in the **target project**. After global installation, start a new task in any project. Type `$` and select Idea2Run, or enter:
+Start a new session of the selected Agent within the chosen scope and use the command in the table, for example:
 
 ```text
-$idea2run I want to build a local photo organizer
+/idea2run I want to build a local photo organizer
 ```
 
-Then reply with “choose option two,” “approved,” or “continue.” If Idea2Run is missing, start a new task within the installation scope or restart Codex. If it still does not appear, ask the Agent to read the `SKILL.md` entry printed by the installer. If multiple same-name entries appear, check their paths and select the intended copy.
+Then reply with “choose option two,” “approved,” or “continue.” Follow the entry and host-specific instructions printed by the installer. If discovery fails, start a new session in the correct project/workspace and check trust, skill switches, and the entry path. You can ask the Agent to read that `SKILL.md` directly and follow its workflow. Existing Pi sessions can use `/reload`. With duplicate copies, check host precedence and the actual loaded path.
+
+Other Agents without native skill discovery can read `plugins/idea2run/skills/idea2run/SKILL.md` and its references from the extracted package. Without file-reading tools, the user can supply the skill text and currently needed references. An Agent without execution tools can still provide options, plans, and staged prompts.
 
 ## What happens during use
 
@@ -79,29 +78,29 @@ You choose the approach, approve the plan, and decide whether to let an Agent ex
 
 ## Updating an existing installation
 
-First download and extract the [latest release](https://github.com/wangyangwjy/idea2run/releases/latest). From the **new extracted directory**, run the command matching your existing scope:
+The example uses Claude Code; use the table above for other Agents. First download and extract the [latest release](https://github.com/wangyangwjy/idea2run/releases/latest). From the **new extracted directory**, run the command matching your existing scope:
 
 ```powershell
 # Project-local: target the original working project
-node scripts/install-skill.mjs "D:\your-project" --update
+node scripts/install-skill.mjs "D:\your-project" --agent claude-code --update
 
 # Global for the current user
-npm run setup -- --global --update
+npm run setup -- --agent claude-code --global --update
 ```
 
-The installer prints the full old-copy backup path and preserves local edits and progress. Confirm the version and scope in the output, then start a new Codex task within that scope. Project-local and global copies are separate; updating one does not update the other. Marketplace users follow the [marketplace update instructions](docs/development.en.md#repository-marketplace-plugin).
+The installer prints the full old-copy backup path and preserves local edits and progress. Confirm the version and scope in the output, then start a new session of the corresponding Agent within that scope. Copies for different hosts, projects, and global scopes are separate; updating one does not update the other. Marketplace users follow the [marketplace update instructions](docs/development.en.md#repository-marketplace-plugin).
 
 ## Common questions
 
 **What if web search is unavailable?** Idea2Run explains the limitation, uses materials you provide, or leaves candidates unverified.
 
-**Which Agents are supported?** The initial plugin entry supports Codex. Generated prompts can be copied to other Agents; plugin integration with other hosts is unverified.
+**Which Agents are supported?** Native skill-directory installation is provided for the five hosts above, using one shared workflow. File installation, host discovery, and complete in-host use are verified separately; see [compatibility and validation](docs/compatibility.en.md). Installation success is not proof of the full workflow. Other Agents can read the skill directly or receive a current-stage prompt.
 
 **Do I need to pay or install a local model?** Idea2Run adds no account, cloud service, or model API. Host costs and the chosen approach's downloads, hardware, and service requirements depend on the actual environment.
 
 ## Development and feedback
 
-The plugin provides clarification, option comparison, plan approval, staged handoff and feedback, four fixed delivery items, and safe project-local/global updates. Fifteen automated tests cover progress, handoff, installation scope, updates, and path protection. Actual local handoffs, installation checks, and user feedback are recorded separately; synthetic samples are not evidence of business execution.
+The plugin provides clarification, option comparison, plan approval, staged handoff and feedback, four fixed delivery items, and safe project-local/global updates. Twenty-four automated tests cover progress, handoff, installation scope, updates, and path protection. Actual local handoffs, installation checks, and user feedback are recorded separately; synthetic samples are not evidence of business execution.
 
 Each version synchronizes GitHub source, its tag, Release, and download package, with matching bilingual documentation and manifests. See the [development and release workflow](docs/development.en.md#version-releases-and-github-synchronization). Acceptance focuses on plugin usability; extra sample-application or host-Agent tests are not gates for this delivery.
 

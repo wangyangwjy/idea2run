@@ -2,63 +2,62 @@
 
 **让想法跑起来。**
 
-说出想法，比较开源方案，选定后确认计划，再一步步实施。用你已有的 Codex，无需为 Idea2Run 额外注册账号或接入模型接口。
+说出想法，比较开源方案，选定后确认计划，再一步步实施。用你已有的 Codex、Claude Code、Hermes Agent、OpenClaw 或 Pi，无需为 Idea2Run 额外注册账号或接入模型接口。
 
 **简体中文** | [English](README.en.md) · [快速上手](#快速上手) · [更新](#已有用户怎么更新) · [开发文档](docs/development.zh-CN.md)
 
-当前版本：**v0.2.4** · [下载最新版](https://github.com/wangyangwjy/idea2run/releases/latest) · [更新记录](CHANGELOG.md)
+当前版本：**v0.3.0** · [下载最新版](https://github.com/wangyangwjy/idea2run/releases/latest) · [更新记录](CHANGELOG.md)
 
 ## 快速上手
 
-### 1. 选择在哪里使用
+### 1. 选择 Agent 和使用范围
 
-| 你想怎么用 | 选择 | 可用范围 |
+| 你使用的 Agent | 安装参数 | 开始使用 |
 | --- | --- | --- |
-| 只在一个项目里用 | 项目内安装（默认） | 目标项目及其子目录 |
-| 多个项目都想用 | 全局安装（当前用户） | 该用户的各个项目 |
+| Codex | `--agent codex`（默认） | `$idea2run 你的想法` |
+| Claude Code | `--agent claude-code` | `/idea2run 你的想法` |
+| Hermes Agent | `--agent hermes` | `/idea2run 你的想法` |
+| OpenClaw | `--agent openclaw` | `/idea2run 你的想法`，也可自然语言请求使用 Idea2Run |
+| Pi coding agent | `--agent pi` | `/skill:idea2run 你的想法` |
+
+**只在一个项目里用**：选项目内安装（默认）。**想跨项目用**：明确选当前用户全局安装。OpenClaw 的“项目内”指它实际使用的工作区；Hermes 的项目发现需要支持该功能的版本、Git 项目和用户信任。不同宿主有不同发现范围，详见[兼容与验证说明](docs/compatibility.zh-CN.md)。
 
 ### 2. 安装
 
-**推荐交给 Codex 安装。** 在要使用的项目里打开 Codex，按你选的范围复制一句：
-
-项目内安装：
+**推荐让你正在用的 Agent 安装。** 在目标项目或工作区中打开它，复制一句并填上 Agent 名称和范围：
 
 ```text
-请将 Idea2Run 安装到当前项目：https://github.com/wangyangwjy/idea2run 。读取最新 README，获取最新发布版，并安装到当前项目的绝对路径。完成后告诉我版本、使用范围、入口和怎么开始。
-```
-
-全局安装：
-
-```text
-请为当前用户全局安装 Idea2Run：https://github.com/wangyangwjy/idea2run 。读取最新 README，获取最新发布版，按全局方式安装，让我在多个项目中使用。完成后告诉我版本、使用范围、入口和怎么开始。
+请安装 Idea2Run：https://github.com/wangyangwjy/idea2run 。我用的 Agent 是 <Codex / Claude Code / Hermes Agent / OpenClaw / Pi>，安装范围是 <当前项目或工作区 / 当前用户全局>。读取最新 README，取得最新发布版，在宿主实际运行的环境中安装。告诉我版本、范围、入口和首次用法。
 ```
 
 <details>
 <summary>自己安装：下载、解压、运行一条命令</summary>
 
-需要 Codex 和 Node.js 22+。在[最新版下载页](https://github.com/wangyangwjy/idea2run/releases/latest)下载 `idea2run-版本号.zip`，解压后，在解压出来的项目文件夹打开终端（这里能看到 `package.json`）。按所选范围运行：
+需要已有 Agent 和 Node.js 22+。从[最新版下载页](https://github.com/wangyangwjy/idea2run/releases/latest)下载完整 ZIP，解压后，在能看到 `package.json` 的目录打开终端。把参数换成你选择的 Agent，路径换成真正的工作项目：
 
 ```powershell
-# 项目内：把下面路径换成你真正要用的项目
-node scripts/install-skill.mjs "D:\你的项目"
+# 例如：Claude Code 项目内安装
+node scripts/install-skill.mjs "D:\你的项目" --agent claude-code
 
-# 全局：供当前用户跨项目使用
-npm run setup -- --global
+# 例如：Pi 当前用户全局安装
+npm run setup -- --agent pi --global
 ```
 
-如果解压目录本身就是你的工作项目，可以直接运行 `npm run setup`。安装输出会告诉你版本、范围、实际入口和首次用法。完整步骤与市场插件安装见[安装说明](docs/development.zh-CN.md#安装与更新)。
+Codex 可省略 `--agent codex`。省略目标目录时，安装到解压目录本身，只有这里就是工作项目时才这样用。WSL、容器或远程 Agent 要在它实际运行的环境中安装，使用那里的路径；聊天客户端所在电脑不一定是宿主机器。安装不修改宿主配置或信任设置。
 
 </details>
 
 ### 3. 开始使用
 
-项目内安装后，在**目标项目**中新开 Codex 任务；全局安装后，可以在任意项目中新开任务。输入 `$` 选择 Idea2Run，或直接输入：
+在所选范围中新开对应 Agent 会话，使用上表的调用方式，例如：
 
 ```text
-$idea2run 我想做一个本地照片整理工具
+/idea2run 我想做一个本地照片整理工具
 ```
 
-之后直接回复“选第二个”“可以”“继续”。如果没有看到 Idea2Run，先在安装范围内新开任务或重启 Codex；仍未显示时，让 Agent 读取安装输出里的 `SKILL.md` 入口。若有多个同名入口，核对路径后选择要用的副本。
+之后直接回复“选第二个”“可以”“继续”。以安装输出的入口和该宿主用法为准。找不到技能时，在正确项目/工作区重开会话，核对信任、技能开关与入口路径；也可以让 Agent 读取输出中的 `SKILL.md` 并按流程处理想法。Pi 已有会话可 `/reload`。多个同名副本同时存在时，以宿主规则和实际加载路径为准。
+
+没有技能加载机制的其他 Agent，也可直接阅读解压包中的 `plugins/idea2run/skills/idea2run/SKILL.md` 及所引用文件。没有文件读取能力时，由用户提供技能正文和当前需要的参考内容；没有执行工具仍可生成方案、计划和分步提示词。
 
 ## 使用时会发生什么
 
@@ -79,29 +78,29 @@ $idea2run 我想做一个本地照片整理工具
 
 ## 已有用户怎么更新
 
-先下载并解压[最新版](https://github.com/wangyangwjy/idea2run/releases/latest)，在**新版解压目录**运行与你原安装范围对应的一条命令：
+以 Claude Code 为例；其他 Agent 换成上表参数。先下载并解压[最新版](https://github.com/wangyangwjy/idea2run/releases/latest)，在**新版解压目录**运行与你原安装范围对应的一条命令：
 
 ```powershell
 # 项目内：目标仍是原来的工作项目
-node scripts/install-skill.mjs "D:\你的项目" --update
+node scripts/install-skill.mjs "D:\你的项目" --agent claude-code --update
 
 # 当前用户全局
-npm run setup -- --global --update
+npm run setup -- --agent claude-code --global --update
 ```
 
-安装时打印完整旧副本备份位置，保留本地修改和已有进度。看输出确认新版本与范围，再在可用范围内新开 Codex 任务。项目内与全局是独立副本，更新一份不会自动更新另一份。市场插件用户按[市场更新说明](docs/development.zh-CN.md#仓库市场插件)操作。
+安装时打印完整旧副本备份位置，保留本地修改和已有进度。看输出确认新版本与范围，再在可用范围内新开对应 Agent 会话。不同宿主、项目内与全局是独立副本，更新一份不会自动更新另一份。市场插件用户按[市场更新说明](docs/development.zh-CN.md#仓库市场插件)操作。
 
 ## 常见问题
 
 **没有联网搜索怎么办？** 会说明限制，使用你提供的资料，或把候选保留为待核对。
 
-**支持哪些 Agent？** 插件入口首版支持 Codex。生成的提示词可复制给其他 Agent；其他宿主的插件接入未验证。
+**支持哪些 Agent？** 提供上述五种宿主的原生技能目录安装入口，核心流程共用。文件安装、宿主发现和宿主内完整流程分别验证，详见[兼容与验证说明](docs/compatibility.zh-CN.md)；不会把安装成功写成全流程通过。其他 Agent 可直接读技能或接收当前阶段提示词。
 
 **需要付费或本地模型吗？** Idea2Run 不增加账号、云服务或模型接口。宿主费用与选定方案的下载、硬件和服务负担按实际环境说明。
 
 ## 开发与反馈
 
-插件提供需求澄清、方案比较、计划确认、分步交接与反馈、四项交付，以及项目内/全局安全更新。15 项自动化测试覆盖进度、交接、安装范围、更新和路径保护；实际本地交接、安装更新和用户反馈另行记录，合成样例不当作业务执行证明。
+插件提供需求澄清、方案比较、计划确认、分步交接与反馈、四项交付，以及项目内/全局安全更新。24 项自动化测试覆盖进度、交接、安装范围、更新和路径保护；实际本地交接、安装更新和用户反馈另行记录，合成样例不当作业务执行证明。
 
 每个版本同步 GitHub 源码、版本标签、Release 和下载包，中英文文档与清单保持一致。详见[开发与发布流程](docs/development.zh-CN.md#版本发布与-github-同步)。验收围绕插件可用性，示例应用或宿主 Agent 的额外测试不作为本次交付门槛。
 

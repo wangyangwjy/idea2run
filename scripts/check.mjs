@@ -13,7 +13,7 @@ const lock = JSON.parse(await readFile(join(root, 'package-lock.json')));
 assert.equal(portable.name, 'idea2run'); assert.equal(manifest.name, portable.name);
 assert.equal(manifest.version, pkg.version); assert.equal(portable.version, pkg.version);
 assert.equal(lock.version, pkg.version); assert.equal(lock.packages[''].version, pkg.version);
-for (const name of ['README.md', 'README.en.md', 'docs/development.zh-CN.md', 'docs/development.en.md']) {
+for (const name of ['README.md', 'README.en.md', 'docs/development.zh-CN.md', 'docs/development.en.md', 'docs/compatibility.zh-CN.md', 'docs/compatibility.en.md']) {
   const current = (await readFile(join(root, name), 'utf8')).match(/^(?:当前版本：|Current version: )\*\*v(\d+\.\d+\.\d+)\*\*/m)?.[1];
   assert.equal(current, pkg.version, `${name} 的当前版本必须与清单一致`);
 }

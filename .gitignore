@@ -2,6 +2,10 @@ node_modules/
 .idea2run/
 .yog/
 /.agents/skills/idea2run/
+/.claude/skills/idea2run/
+/.hermes/skills/idea2run/
+/.pi/skills/idea2run/
+/skills/idea2run/
 exports/
 coverage/
 *.log

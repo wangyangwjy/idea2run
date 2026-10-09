@@ -2,6 +2,14 @@
 
 [简体中文](CHANGELOG.md) | [Usage](README.en.md)
 
+## 0.3.0 — 2026-10-09
+
+- One shared skill targets Codex, Claude Code, Hermes Agent, OpenClaw, and Pi. `--agent` selects native directories and invocation; Codex remains the default.
+- Project/workspace and current-user global installations retain complete old-copy backups during updates. Global paths follow host directory environment variables without changing configuration, trust, or credentials.
+- First-use instructions explain Hermes project trust, OpenClaw workspaces, Pi startup directories, and WSL/container/remote paths.
+- The workflow uses actual available tools, reports missing search/file/execution capabilities, and checks file accessibility and path mapping before cross-environment handoff.
+- Twenty-four tests cover five-host installation, updates, scope isolation, custom directories, and path protection. Compatibility docs distinguish file installation, native discovery, and complete use instead of claiming cross-host execution from fixtures.
+
 ## 0.2.4 — 2026-10-09
 
 - Installation and use follow the user's sequence: choose project-local/global scope, use short Codex installation prompts or a direct download, and get minimal commands and first-use instructions. Target the actual working project and obtain the new source before updating.

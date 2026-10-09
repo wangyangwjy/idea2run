@@ -6,6 +6,8 @@ Local installation scripts and helper tools require Node.js 22+. Run the followi
 
 ## Install for local development
 
+v0.3.0 adds `--agent codex|claude-code|hermes|openclaw|pi`. Existing commands without `--agent` still target Codex. See [compatibility](compatibility.en.md) for other hosts' installation paths, commands, workspace/project requirements, directory environment variables, and validation scope. All hosts share the source skill; use the selected host's invocation after installation.
+
 Clone the repository, then install a skill copy from the repository directory:
 
 ```powershell
@@ -43,7 +45,7 @@ During development, refer to the source file directly so copied skills do not fa
 
 ## Installation and updates
 
-Current version: **v0.2.4**. For installation and updates, obtain the source package from the [latest GitHub release](https://github.com/wangyangwjy/idea2run/releases/latest), then choose an installation scope. If the main branch contains later development, use the release tag and attachments as the version reference. Reinstalling from an old source directory is not an upgrade.
+Current version: **v0.3.0**. For installation and updates, obtain the source package from the [latest GitHub release](https://github.com/wangyangwjy/idea2run/releases/latest), then choose an installation scope. If the main branch contains later development, use the release tag and attachments as the version reference. Reinstalling from an old source directory is not an upgrade.
 
 ### Project-local skill
 
@@ -162,7 +164,7 @@ tests/                          Workflow tests and synthetic inputs
 
 Each published version provides GitHub source, a matching `vVERSION` tag, a Release, and an `idea2run-VERSION.zip` package. Users install from the [latest release](https://github.com/wangyangwjy/idea2run/releases/latest). Local completion alone does not mean GitHub is updated.
 
-1. Update `package.json`, the lockfile, both plugin manifests, bilingual homepages/development guides, and both changelogs. `npm run check` requires matching current versions and checks release tags against the manifests.
+1. Update `package.json`, the lockfile, both plugin manifests, bilingual homepages/development/compatibility guides, and both changelogs. `npm run check` requires matching current versions and checks release tags against the manifests.
 2. Run `npm test`, `npm run check`, and `npm audit --omit=dev`; inspect actual installation/updates, documentation, and `git diff`. Commit public files only.
 3. Within the user's authorized GitHub synchronization scope, commit and push main, then create and push the matching version tag for that commit. Without publication authorization, prepare reviewable changes only; do not repeatedly ask when authorization already exists.
 4. `.github/workflows/release.yml` checks main/PR changes. After a version tag passes checks on Linux and Windows with Node.js 22, it creates the full source ZIP, SHA256SUMS, and bilingual release notes, then publishes the GitHub Release. Fix failures first; do not overwrite published tags or invent success.

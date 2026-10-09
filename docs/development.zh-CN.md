@@ -6,6 +6,8 @@
 
 ## 本地开发安装
 
+v0.3.0 增加 `--agent codex|claude-code|hermes|openclaw|pi`。以下旧命令不带 `--agent` 时仍是 Codex；其他宿主的安装路径、调用方式、工作区/项目条件、自定义目录环境变量及验证范围见[兼容说明](compatibility.zh-CN.md)。所有宿主共用源技能；安装后要使用对应宿主的调用方式。
+
 克隆仓库后，在项目目录中安装技能副本：
 
 ```powershell
@@ -43,7 +45,7 @@ node scripts/install-skill.mjs "D:\你的项目"
 
 ## 安装与更新
 
-当前版本：**v0.2.4**。用户安装与更新从 [GitHub 最新发布页](https://github.com/wangyangwjy/idea2run/releases/latest)取得源码包，再选择安装范围。主分支包含后续开发时，以发布页的版本标签和附件为准；不要从旧源码目录重装并当作升级。
+当前版本：**v0.3.0**。用户安装与更新从 [GitHub 最新发布页](https://github.com/wangyangwjy/idea2run/releases/latest)取得源码包，再选择安装范围。主分支包含后续开发时，以发布页的版本标签和附件为准；不要从旧源码目录重装并当作升级。
 
 ### 项目内技能
 
@@ -162,7 +164,7 @@ tests/                     流程测试与合成输入
 
 每个发布版本都提供 GitHub 源码、`v版本号` 标签、Release 和 `idea2run-版本号.zip` 下载包。用户从[最新发布页](https://github.com/wangyangwjy/idea2run/releases/latest)安装；不能把仅本地完成当作线上已更新。
 
-1. 更新 `package.json`、lock、两个插件清单、双语首页/开发说明和双语 CHANGELOG。`npm run check` 要求当前版本一致，标签发布时还校验标签与清单。
+1. 更新 `package.json`、lock、两个插件清单、双语首页/开发/兼容说明和双语 CHANGELOG。`npm run check` 要求当前版本一致，标签发布时还校验标签与清单。
 2. 运行 `npm test`、`npm run check`、`npm audit --omit=dev`；核对实际安装/更新、文档和 `git diff`，提交只包含公开文件。
 3. 在用户已授权 GitHub 同步的范围内提交并推送到 main，为同一提交创建并推送对应版本标签。未得到发布授权时只准备可审阅改动；已有明确授权不重复询问。
 4. `.github/workflows/release.yml` 在 main/PR 上检查；版本标签在 Linux 和 Windows 的 Node.js 22 检查均通过后，自动生成完整源码 ZIP、SHA256SUMS 和双语更新说明，发布 GitHub Release。失败先修复，不覆盖已发布标签或伪造成功。
