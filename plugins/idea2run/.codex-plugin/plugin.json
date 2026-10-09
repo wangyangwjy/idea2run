@@ -1,6 +1,6 @@
 {
   "name": "idea2run",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "从一个想法寻找开源项目、比较方案，生成计划与分步 Agent 提示词。",
   "author": {
     "name": "wangyangwjy"

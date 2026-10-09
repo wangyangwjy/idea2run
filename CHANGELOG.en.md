@@ -2,6 +2,12 @@
 
 [简体中文](CHANGELOG.md) | [Usage](README.en.md)
 
+## 0.3.1 — 2026-10-09
+
+- Bilingual homepages add brand banners, release/check/license badges, clear navigation, and an illustrated three-column overview.
+- Installation, first use, and updates are easier to find; FAQs are collapsible, with existing section links and compatibility details preserved.
+- Banners ship with the source package without new dependencies; the plugin workflow and installation methods remain consistent.
+
 ## 0.3.0 — 2026-10-09
 
 - One shared skill targets Codex, Claude Code, Hermes Agent, OpenClaw, and Pi. `--agent` selects native directories and invocation; Codex remains the default.

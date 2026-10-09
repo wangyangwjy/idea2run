@@ -45,7 +45,7 @@ During development, refer to the source file directly so copied skills do not fa
 
 ## Installation and updates
 
-Current version: **v0.3.0**. For installation and updates, obtain the source package from the [latest GitHub release](https://github.com/wangyangwjy/idea2run/releases/latest), then choose an installation scope. If the main branch contains later development, use the release tag and attachments as the version reference. Reinstalling from an old source directory is not an upgrade.
+Current version: **v0.3.1**. For installation and updates, obtain the source package from the [latest GitHub release](https://github.com/wangyangwjy/idea2run/releases/latest), then choose an installation scope. If the main branch contains later development, use the release tag and attachments as the version reference. Reinstalling from an old source directory is not an upgrade.
 
 ### Project-local skill
 

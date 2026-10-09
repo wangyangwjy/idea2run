@@ -2,7 +2,7 @@
 
 [Homepage](../README.en.md) | [简体中文](compatibility.zh-CN.md)
 
-Current version: **v0.3.0**. One standard `SKILL.md`, supporting references, and optional progress scripts integrate through native host skill mechanisms. Codex manifests are for Codex; other hosts install the complete skill directory without a Codex manifest or an additional model API.
+Current version: **v0.3.1**. One standard `SKILL.md`, supporting references, and optional progress scripts integrate through native host skill mechanisms. Codex manifests are for Codex; other hosts install the complete skill directory without a Codex manifest or an additional model API.
 
 ## Installation paths and first use
 

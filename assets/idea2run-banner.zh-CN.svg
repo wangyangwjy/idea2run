@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="300" viewBox="0 0 1280 300" role="img" aria-labelledby="title desc">
+  <title id="title">Idea2Run — 让想法跑起来。</title>
+  <desc id="desc">找方案 · 定计划 · 分步交给 Agent. One shared workflow for Codex, Claude Code, Hermes Agent, OpenClaw and Pi.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101b35"/><stop offset="1" stop-color="#17294b"/></linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8b8aff"/><stop offset="1" stop-color="#57d9ef"/></linearGradient>
+    <linearGradient id="connector"><stop stop-color="#66d7ed"/><stop offset="1" stop-color="#a49bff"/></linearGradient>
+  </defs>
+  <rect width="1280" height="300" rx="22" fill="url(#background)"/>
+  <path d="M965 0h315v300h-105L965 0Z" fill="#263764" opacity=".28"/>
+  <circle cx="1210" cy="-20" r="155" fill="none" stroke="#8094c0" stroke-opacity=".12"/>
+  <circle cx="1250" cy="300" r="130" fill="none" stroke="#8094c0" stroke-opacity=".12"/>
+  <g transform="translate(48 47)">
+    <rect width="58" height="58" rx="17" fill="url(#brand)"/>
+    <g fill="none" stroke="#101b35" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 34c0-4-6-7-6-14a13 13 0 0 1 26 0c0 7-6 10-6 14"/>
+      <path d="M22 35h14m-13 6h12m-10 5h8M29 12v8m-4 4 4 4 4-4"/>
+    </g>
+  </g>
+  <g font-family="Segoe UI, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+    <text x="125" y="94" fill="#f5f7ff" font-size="56" font-weight="700" letter-spacing="-1.5">Idea2Run</text>
+    <text x="49" y="157" fill="#e7ecfb" font-size="30" font-weight="600">让想法跑起来。</text>
+    <text x="50" y="196" fill="#acbad6" font-size="19">找方案 · 定计划 · 分步交给 Agent</text>
+    <rect x="50" y="230" width="216" height="28" rx="14" fill="#213353"/>
+    <circle cx="67" cy="244" r="4" fill="#62ddc0"/>
+    <text x="80" y="249" fill="#d4e1f4" font-size="12" font-weight="600" letter-spacing="1">ONE IDEA · YOUR AGENT</text>
+  </g>
+  <path d="M793 147h32m115 0h32" fill="none" stroke="#627fa7" stroke-width="2"/>
+  <path d="m818 143 7 4-7 4m147-8 7 4-7 4" fill="none" stroke="#94a8d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-family="Segoe UI, sans-serif" text-anchor="middle">
+    <rect x="678" y="81" width="115" height="137" rx="19" fill="#1c3450" stroke="#36546d"/>
+    <rect x="825" y="81" width="115" height="137" rx="19" fill="#2a3059" stroke="#4a4878"/>
+    <rect x="972" y="81" width="115" height="137" rx="19" fill="#2d3550" stroke="#665870"/>
+    <g fill="none" stroke="#6ee0e5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(718 107)">
+      <path d="M0 0h17v20H0zm24 7h11v20H24zM5 7h7m-7 6h7m17 2h2m-2 6h2"/>
+      <path d="M5 32h26"/>
+    </g>
+    <g fill="none" stroke="#b5a5ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(864 105)">
+      <path d="M7 4H3v34h31V4h-4M11 0h15v8H11zM8 19l3 3 5-6m5 4h8M8 30l3 3 5-6m5 4h8"/>
+    </g>
+    <g fill="none" stroke="#f2c188" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(1008 106)">
+      <rect width="42" height="33" rx="5"/><path d="m8 11 6 5-6 5m12 0h12M9 40h24"/>
+    </g>
+    <text x="735" y="185" fill="#a4e4ec" font-size="13" font-weight="600" letter-spacing="1">COMPARE</text>
+    <text x="882" y="185" fill="#c3b7fc" font-size="13" font-weight="600" letter-spacing="1">PLAN</text>
+    <text x="1029" y="185" fill="#f4d1a8" font-size="13" font-weight="600" letter-spacing="1">BUILD</text>
+    <text x="882" y="254" fill="#8094b8" font-size="12" letter-spacing="2">SMALL STEPS. REAL RESULTS.</text>
+  </g>
+</svg>

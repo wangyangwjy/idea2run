@@ -1,16 +1,36 @@
-# 🚀 Idea2Run
+<p align="center">
+  <img src="assets/idea2run-banner.en.svg" alt="Idea2Run: turn ideas into working projects. Compare, plan, and build step by step." width="100%">
+</p>
 
-**Turn ideas into working projects.**
+<p align="center">
+  <strong>One idea. Clear options. An approved plan. A practical next step.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/wangyangwjy/idea2run/releases/latest"><img src="https://img.shields.io/github/v/release/wangyangwjy/idea2run?style=flat-square&amp;label=release&amp;color=6366f1" alt="Latest release"></a>
+  <a href="https://github.com/wangyangwjy/idea2run/actions/workflows/release.yml"><img src="https://github.com/wangyangwjy/idea2run/actions/workflows/release.yml/badge.svg?branch=main" alt="Windows and Linux checks"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0f766e?style=flat-square" alt="MIT license"></a>
+</p>
+
+<p align="center">
+  <a href="README.md">简体中文</a> · <strong>English</strong>
+  <br>
+  <a href="#quick-start">🚀 Quick start</a> · <a href="https://github.com/wangyangwjy/idea2run/releases/latest">📦 Latest download</a> · <a href="docs/compatibility.en.md">🔌 Agent compatibility</a> · <a href="#updating-an-existing-installation">↻ Update guide</a>
+</p>
+
+Current version: **v0.3.1** · [Changelog](CHANGELOG.en.md) · [Development docs](docs/development.en.md)
 
 Describe an idea, compare open-source approaches, approve a plan, and implement it step by step. Use your existing Codex, Claude Code, Hermes Agent, OpenClaw, or Pi; Idea2Run adds no account or model API.
 
-[简体中文](README.md) | **English** · [Quick start](#quick-start) · [Updates](#updating-an-existing-installation) · [Development docs](docs/development.en.md)
+| 🧭 Choose an approach | 🗂️ Approve a plan | 🤝 Hand off in stages |
+| --- | --- | --- |
+| Compare real projects, including environment, downloads, and adaptation effort | Review the complete plan before approving implementation | One stage at a time, continuing or repairing based on actual feedback |
 
-Current version: **v0.3.0** · [Download the latest version](https://github.com/wangyangwjy/idea2run/releases/latest) · [Changelog](CHANGELOG.en.md)
+---
 
 ## Quick start
 
-### 1. Choose your Agent and scope
+### ① 🧭 Choose your Agent and scope
 
 | Your Agent | Installation option | Start using it |
 | --- | --- | --- |
@@ -22,7 +42,7 @@ Current version: **v0.3.0** · [Download the latest version](https://github.com/
 
 **One project**: choose project-local installation (default). **Across projects**: explicitly choose global installation for the current user. For OpenClaw, local means its actual workspace. Hermes project discovery requires a version supporting it, a Git project, and user trust. Discovery scope varies by host; see [compatibility and validation](docs/compatibility.en.md).
 
-### 2. Install
+### ② 📦 Install
 
 **Let your current Agent install it.** Open it in the target project or workspace and copy this prompt, filling in your Agent and scope:
 
@@ -31,7 +51,7 @@ Install Idea2Run: https://github.com/wangyangwjy/idea2run . My Agent is <Codex /
 ```
 
 <details>
-<summary>Install it yourself: download, extract, run one command</summary>
+<summary>🛠️ Install it yourself: download, extract, run one command</summary>
 
 Requires an existing Agent and Node.js 22+. Download the full ZIP from the [latest release](https://github.com/wangyangwjy/idea2run/releases/latest), extract it, and open a terminal in the folder containing `package.json`. Choose your Agent and replace the path with your actual working project:
 
@@ -47,7 +67,7 @@ Codex can omit `--agent codex`. Omitting the target installs into the extracted 
 
 </details>
 
-### 3. Start using it
+### ③ 💬 Describe your idea
 
 Start a new session of the selected Agent within the chosen scope and use the command in the table, for example:
 
@@ -67,12 +87,12 @@ Describe → Clarify key needs → Compare short options → Choose → Approve 
 
 | What you need | What Idea2Run provides |
 | --- | --- |
-| Clarify requirements | The goal, inputs, outputs, and success criteria, with grouped questions about gaps that affect the choice |
-| Choose an approach | Usually 2–3 short options: ready to use, adaptation required, or development required, with environment, downloads, effort, and unknowns |
-| Know what comes next | A complete plan for the chosen approach, including outputs, checks, and failure handling |
-| Have an Agent execute | One short prompt per stage, for the current Agent or another Agent |
-| Continue or repair | Paste actual results into the original conversation; continue after checks pass or fix the current stage |
-| Use the result | Four fixed items: what was built, how to start it, how to use it, and what remains unfinished, with a direct entry point |
+| 🎯 Clarify requirements | The goal, inputs, outputs, and success criteria, with grouped questions about gaps that affect the choice |
+| 🔎 Choose an approach | Usually 2–3 short options: ready to use, adaptation required, or development required, with environment, downloads, effort, and unknowns |
+| 🗂️ Know what comes next | A complete plan for the chosen approach, including outputs, checks, and failure handling |
+| 🤝 Have an Agent execute | One short prompt per stage, for the current Agent or another Agent |
+| ↻ Continue or repair | Paste actual results into the original conversation; continue after checks pass or fix the current stage |
+| ✅ Use the result | Four fixed items: what was built, how to start it, how to use it, and what remains unfinished, with a direct entry point |
 
 You choose the approach, approve the plan, and decide whether to let an Agent execute. Recommendations have real sources; download sizes, compatibility, and timings stay unknown without evidence. Documented support does not prove execution in your environment. Changes to the plan require reviewing the relevant approvals.
 
@@ -92,11 +112,26 @@ The installer prints the full old-copy backup path and preserves local edits and
 
 ## Common questions
 
-**What if web search is unavailable?** Idea2Run explains the limitation, uses materials you provide, or leaves candidates unverified.
+<details>
+<summary>🌐 What if web search is unavailable?</summary>
 
-**Which Agents are supported?** Native skill-directory installation is provided for the five hosts above, using one shared workflow. File installation, host discovery, and complete in-host use are verified separately; see [compatibility and validation](docs/compatibility.en.md). Installation success is not proof of the full workflow. Other Agents can read the skill directly or receive a current-stage prompt.
+Idea2Run explains the limitation, uses materials you provide, or leaves candidates unverified.
 
-**Do I need to pay or install a local model?** Idea2Run adds no account, cloud service, or model API. Host costs and the chosen approach's downloads, hardware, and service requirements depend on the actual environment.
+</details>
+
+<details>
+<summary>🔌 Which Agents are supported?</summary>
+
+Native skill-directory installation is provided for the five hosts above, using one shared workflow. File installation, host discovery, and complete in-host use are verified separately; see [compatibility and validation](docs/compatibility.en.md). Other Agents can read the skill directly or receive a current-stage prompt.
+
+</details>
+
+<details>
+<summary>💳 Do I need to pay or install a local model?</summary>
+
+Idea2Run adds no account, cloud service, or model API. Host costs and the chosen approach's downloads, hardware, and service requirements depend on the actual environment.
+
+</details>
 
 ## Development and feedback
 

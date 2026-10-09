@@ -45,7 +45,7 @@ node scripts/install-skill.mjs "D:\你的项目"
 
 ## 安装与更新
 
-当前版本：**v0.3.0**。用户安装与更新从 [GitHub 最新发布页](https://github.com/wangyangwjy/idea2run/releases/latest)取得源码包，再选择安装范围。主分支包含后续开发时，以发布页的版本标签和附件为准；不要从旧源码目录重装并当作升级。
+当前版本：**v0.3.1**。用户安装与更新从 [GitHub 最新发布页](https://github.com/wangyangwjy/idea2run/releases/latest)取得源码包，再选择安装范围。主分支包含后续开发时，以发布页的版本标签和附件为准；不要从旧源码目录重装并当作升级。
 
 ### 项目内技能
 
