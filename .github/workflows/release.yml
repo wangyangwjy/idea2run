@@ -1,0 +1,68 @@
+name: Checks and release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  checks:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - run: npm test
+      - run: npm run check
+      - run: npm audit --omit=dev
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Build public source package and release notes
+        shell: bash
+        run: |
+          VERSION=$(node -p "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).version")
+          git archive --format=zip --prefix="idea2run-${VERSION}/" --output="idea2run-${VERSION}.zip" HEAD
+          sha256sum "idea2run-${VERSION}.zip" > SHA256SUMS
+          node --input-type=module <<'JS' > release-notes.md
+          import fs from 'node:fs';
+          for (const file of ['CHANGELOG.md', 'CHANGELOG.en.md']) {
+            const body = fs.readFileSync(file, 'utf8').split(/^## /m)[1].split(/^## /m)[0];
+            console.log('## ' + body.trim() + '\n');
+          }
+          JS
+      - name: Publish version and download assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          VERSION=$(node -p "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).version")
+          gh release create "v${VERSION}" "idea2run-${VERSION}.zip" SHA256SUMS --verify-tag --title "Idea2Run v${VERSION}" --notes-file release-notes.md

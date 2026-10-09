@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "idea2run",
-  "version": "0.1.1",
+  "version": "0.2.4",
   "description": "从想法寻找开源方案，生成执行计划与简短的分步 Agent 提示词。",
   "author": {
     "name": "wangyangwjy"

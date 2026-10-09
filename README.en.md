@@ -2,101 +2,111 @@
 
 **Turn ideas into working projects.**
 
-Describe your idea, find suitable open-source projects, choose an approach, and let an Agent work through the plan step by step.
+Describe an idea, compare open-source approaches, approve a plan, and implement it step by step. Use your existing Codex; Idea2Run adds no account or model API.
 
-[简体中文（默认）](README.md) | **English** · [Quick start](#quick-start) · [What it helps with](#what-it-helps-with) · [Development docs](docs/development.en.md)
+[简体中文](README.md) | **English** · [Quick start](#quick-start) · [Updates](#updating-an-existing-installation) · [Development docs](docs/development.en.md)
 
-## Start with an idea
-
-“I want to build a local photo organizer.”
-
-“I want to set up a team knowledge base.”
-
-“I want to rename Word files based on their content.”
-
-Idea2Run clarifies the key requirements, searches for suitable open-source projects, and presents a few understandable options. Once you choose, it creates a complete plan. After approving the plan, you can implement it yourself, ask an Agent to execute it, or copy short prompts to another Agent.
-
-```text
-Describe → Compare → Choose → Review the plan → Approve → Work step by step
-```
+Current version: **v0.2.4** · [Download the latest version](https://github.com/wangyangwjy/idea2run/releases/latest) · [Changelog](CHANGELOG.en.md)
 
 ## Quick start
 
-The first version supports **Codex** and requires a host version with plugin support. Send this message to your Agent:
+### 1. Choose where to use it
+
+| What you want | Choose | Available in |
+| --- | --- | --- |
+| Use it in one project | Project-local installation (default) | The target project and its subdirectories |
+| Use it across projects | Global installation (current user) | This user's projects |
+
+### 2. Install
+
+**Let Codex install it for you.** Open Codex in the project you want to work in, then copy the prompt for your chosen scope:
+
+Project-local installation:
 
 ```text
-Help me install Idea2Run in Codex: https://github.com/wangyangwjy/idea2run . Follow the installation instructions in the README, then tell me how to start using it.
+Install Idea2Run in my current project: https://github.com/wangyangwjy/idea2run . Read the latest README, obtain the latest release, and install into the current project's absolute path. Tell me the version, scope, entry point, and how to start.
+```
+
+Global installation:
+
+```text
+Install Idea2Run globally for my current user: https://github.com/wangyangwjy/idea2run . Read the latest README, obtain the latest release, and use global installation so I can use it across projects. Tell me the version, scope, entry point, and how to start.
 ```
 
 <details>
-<summary>Install it yourself: two commands</summary>
+<summary>Install it yourself: download, extract, run one command</summary>
+
+Requires Codex and Node.js 22+. Download `idea2run-version.zip` from the [latest release](https://github.com/wangyangwjy/idea2run/releases/latest), extract it, and open a terminal in the extracted project folder containing `package.json`. Run the command for your chosen scope:
 
 ```powershell
-codex plugin marketplace add wangyangwjy/idea2run
-codex plugin add idea2run@idea2run
+# Project-local: replace this path with your actual working project
+node scripts/install-skill.mjs "D:\your-project"
+
+# Global: available across projects for the current user
+npm run setup -- --global
 ```
 
-If your version does not support plugin commands, use the [project-local skill installation](docs/development.en.md#install-for-local-development).
+If the extracted directory itself is your working project, you can run `npm run setup` directly. The output shows the version, scope, actual entry point, and first-use example. See [installation instructions](docs/development.en.md#installation-and-updates) for full steps and marketplace installation.
 
 </details>
 
-After installation, **start a new task**, type `$`, select Idea2Run, and describe your idea:
+### 3. Start using it
+
+After project-local installation, start a new Codex task in the **target project**. After global installation, start a new task in any project. Type `$` and select Idea2Run, or enter:
 
 ```text
 $idea2run I want to build a local photo organizer
 ```
 
-Select it once at the start. After that, reply with “choose option two,” “approved,” or “continue.” You do not need to repeat long instructions. If the plugin does not appear, restart the app and select it again.
+Then reply with “choose option two,” “approved,” or “continue.” If Idea2Run is missing, start a new task within the installation scope or restart Codex. If it still does not appear, ask the Agent to read the `SKILL.md` entry printed by the installer. If multiple same-name entries appear, check their paths and select the intended copy.
 
-## What it helps with
+## What happens during use
+
+```text
+Describe → Clarify key needs → Compare short options → Choose → Approve the full plan → Work step by step → Receive outputs and usage instructions
+```
 
 | What you need | What Idea2Run provides |
 | --- | --- |
-| Find suitable open-source projects | Project links, intended uses, environment requirements, and key limitations |
-| Choose an implementation approach | Usually 2–3 meaningfully different options, prioritizing projects you can use directly or adapt with small changes |
-| Know what to do next | A complete plan for the selected approach, with stage outputs, verification, and failure handling |
-| Hand work to an Agent | One short prompt per stage, for the current Agent or another Agent |
-| Handle execution problems | Progress based on actual feedback; fix a failed stage before moving on |
+| Clarify requirements | The goal, inputs, outputs, and success criteria, with grouped questions about gaps that affect the choice |
+| Choose an approach | Usually 2–3 short options: ready to use, adaptation required, or development required, with environment, downloads, effort, and unknowns |
+| Know what comes next | A complete plan for the chosen approach, including outputs, checks, and failure handling |
+| Have an Agent execute | One short prompt per stage, for the current Agent or another Agent |
+| Continue or repair | Paste actual results into the original conversation; continue after checks pass or fix the current stage |
+| Use the result | Four fixed items: what was built, how to start it, how to use it, and what remains unfinished, with a direct entry point |
 
-You choose the approach, approve the plan, and decide whether to let an Agent execute it. Changes to the approach require reviewing and confirming the plan again.
+You choose the approach, approve the plan, and decide whether to let an Agent execute. Recommendations have real sources; download sizes, compatibility, and timings stay unknown without evidence. Documented support does not prove execution in your environment. Changes to the plan require reviewing the relevant approvals.
 
-## Keep it lightweight
+## Updating an existing installation
 
-- **Use your existing Agent.** The host supplies the model, search, and execution tools. Idea2Run requires no additional account or separate model API.
-- **Look for existing projects first.** Recommendations include real sources and favor deployment, configuration, or small adaptations.
-- **Work one step at a time.** Each handoff prompt is limited to 2,400 characters and focuses on one verifiable output.
-- **Save progress when needed.** Optional local tools record progress and export plans and prompts; they do not execute commands from the plan.
+First download and extract the [latest release](https://github.com/wangyangwjy/idea2run/releases/latest). From the **new extracted directory**, run the command matching your existing scope:
+
+```powershell
+# Project-local: target the original working project
+node scripts/install-skill.mjs "D:\your-project" --update
+
+# Global for the current user
+npm run setup -- --global --update
+```
+
+The installer prints the full old-copy backup path and preserves local edits and progress. Confirm the version and scope in the output, then start a new Codex task within that scope. Project-local and global copies are separate; updating one does not update the other. Marketplace users follow the [marketplace update instructions](docs/development.en.md#repository-marketplace-plugin).
 
 ## Common questions
 
-**Will it activate automatically if I just describe an idea?**
+**What if web search is unavailable?** Idea2Run explains the limitation, uses materials you provide, or leaves candidates unverified.
 
-The host may select the skill based on your request, but activation is not guaranteed. To invoke it explicitly, type `$idea2run`, or type `$` and select Idea2Run.
+**Which Agents are supported?** The initial plugin entry supports Codex. Generated prompts can be copied to other Agents; plugin integration with other hosts is unverified.
 
-**Which Agents are supported?**
+**Do I need to pay or install a local model?** Idea2Run adds no account, cloud service, or model API. Host costs and the chosen approach's downloads, hardware, and service requirements depend on the actual environment.
 
-The first plugin version supports Codex. Generated prompts can be copied to other Agents; plugin compatibility with other hosts still needs verification. See the [official skills and plugins invocation guide](https://learn.chatgpt.com/docs/skills-and-plugins).
+## Development and feedback
 
-**Do I need to pay or install a local model?**
+The plugin provides clarification, option comparison, plan approval, staged handoff and feedback, four fixed delivery items, and safe project-local/global updates. Fifteen automated tests cover progress, handoff, installation scope, updates, and path protection. Actual local handoffs, installation checks, and user feedback are recorded separately; synthetic samples are not evidence of business execution.
 
-The plugin does not add a paid model API or require a local model. Your host's usage costs and the selected approach's downloads, hardware, and service costs depend on your environment and chosen solution.
+Each version synchronizes GitHub source, its tag, Release, and download package, with matching bilingual documentation and manifests. See the [development and release workflow](docs/development.en.md#version-releases-and-github-synchronization). Acceptance focuses on plugin usability; extra sample-application or host-Agent tests are not gates for this delivery.
 
-**What if web search is unavailable?**
-
-Idea2Run explains the limitation, uses materials you provide, or leaves candidates unverified. Documentation checks and actual execution verification are recorded separately.
-
-## Current progress
-
-**v0.1.1 · Early version**, with option comparison, plan generation, staged handoff, local progress, and export tools. The repository's **9 automated tests** cover progress and handoff tools.
-
-There is one recorded real-world trial of content-based Word file renaming on Windows. The user approved an approach and authorized the current Agent to implement it; the tool was built and verified on sample copies. Automatic processing of the target directory was not enabled. The complete workflow of copying prompts between Agents still needs verification. The idea examples above do not mean every scenario has been tested. Private conversations and user files are not included in the repository.
-
-Next priorities: clarify key requirements earlier, explain implementation effort when comparing options, and give clear startup and usage instructions at delivery. Share issues from real use through [Issues](https://github.com/wangyangwjy/idea2run/issues).
-
-## Development and contributions
-
-See the [development docs](docs/development.en.md) for alternative installation, local tools, verification commands, and contribution guidelines. Keep the main workflow short and add capabilities that help users reach a usable result faster.
+Report actual issues through [Issues](https://github.com/wangyangwjy/idea2run/issues). Progress is saved locally under `.idea2run/` when needed; private conversations, machine information, and user outputs are excluded from the public repository and download package.
 
 ## License
 
-[MIT](LICENSE). Candidate open-source projects, dependencies, and user samples retain their own licenses.
+[MIT](LICENSE). Candidate projects, dependencies, and user samples retain their own licenses.

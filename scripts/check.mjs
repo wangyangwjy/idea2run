@@ -9,8 +9,19 @@ const plugin = join(root, 'plugins', 'idea2run');
 const portable = JSON.parse(await readFile(join(plugin, 'plugin.json')));
 const manifest = JSON.parse(await readFile(join(plugin, '.codex-plugin', 'plugin.json')));
 const pkg = JSON.parse(await readFile(join(root, 'package.json')));
+const lock = JSON.parse(await readFile(join(root, 'package-lock.json')));
 assert.equal(portable.name, 'idea2run'); assert.equal(manifest.name, portable.name);
 assert.equal(manifest.version, pkg.version); assert.equal(portable.version, pkg.version);
+assert.equal(lock.version, pkg.version); assert.equal(lock.packages[''].version, pkg.version);
+for (const name of ['README.md', 'README.en.md', 'docs/development.zh-CN.md', 'docs/development.en.md']) {
+  const current = (await readFile(join(root, name), 'utf8')).match(/^(?:当前版本：|Current version: )\*\*v(\d+\.\d+\.\d+)\*\*/m)?.[1];
+  assert.equal(current, pkg.version, `${name} 的当前版本必须与清单一致`);
+}
+for (const name of ['CHANGELOG.md', 'CHANGELOG.en.md']) {
+  const contents = await readFile(join(root, name), 'utf8');
+  assert.equal(contents.match(/^## (\d+\.\d+\.\d+)\b/m)?.[1], pkg.version, `${name} 的最新更新记录必须与清单一致`);
+}
+if (process.env.GITHUB_REF_TYPE === 'tag') assert.equal(process.env.GITHUB_REF_NAME, `v${pkg.version}`, '发布标签必须与清单版本一致');
 assert.equal(manifest.skills, './skills/');
 assert.ok(!manifest.mcpServers && !manifest.apps, '不要声明不存在的服务');
 const skillRoot = join(plugin, 'skills', 'idea2run');
@@ -39,4 +50,4 @@ for (const entry of ['scripts', 'tests']) {
     assert.equal(result.status, 0, result.stderr);
   }
 }
-console.log('通过：插件清单、版本、技能引用、简短工作流与脚本语法。');
+console.log('通过：插件清单、双语版本/更新记录、发布标签、技能引用、简短工作流与脚本语法。');

@@ -1,6 +1,6 @@
 {
   "name": "idea2run",
-  "version": "0.1.1",
+  "version": "0.2.4",
   "description": "从一个想法寻找开源项目、比较方案，生成计划与分步 Agent 提示词。",
   "author": {
     "name": "wangyangwjy"
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Idea2Run",
     "shortDescription": "找方案，定计划，分步交给 Agent。",
-    "longDescription": "提出想法，比较真实开源项目支持的方案；选定后生成执行计划，并按需提供简短的分步 Agent 提示词。",
+    "longDescription": "提出想法，问清关键需求并比较真实开源方案；选定后生成计划，按阶段交接与核对实际反馈，最后说明成果入口、启动、用法与未完成项。",
     "developerName": "wangyangwjy",
     "category": "Productivity",
     "capabilities": [],

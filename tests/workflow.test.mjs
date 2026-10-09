@@ -127,3 +127,20 @@ test('提示词足够短，只含选定路线与当前阶段，不附整份计�
   const long = structuredClone(plan); long.steps[0].instructions = Array(4).fill('很'.repeat(1100));
   assert.throws(() => update(planned(), 'plan', long), /超过 2400/);
 });
+
+test('根据实际记录生成下一提示词，携带上步摘要但不把报告写成独立验证', () => {
+  const result = passed('input');
+  result.summary = '已核对测试输入，产物位于 E:/测试工作目录/input-report.md；下步使用该报告。';
+  let session = update(handoff(), 'result', { id: 'inspect', result });
+  session = update(session, 'authorize', { id: 'configure' }, true);
+  const prompt = renderPrompt(session);
+  assert.match(prompt, /上步反馈（用户\/Agent 报告）/);
+  assert.match(prompt, /E:\/测试工作目录\/input-report.md/);
+  assert.match(prompt, /产物绝对路径/);
+  assert.doesNotMatch(prompt, /本步：检查测试输入/);
+  const longResult = passed('input'); longResult.summary = '已'.repeat(700);
+  let longSession = update(handoff(), 'result', { id: 'inspect', result: longResult });
+  longSession = update(longSession, 'authorize', { id: 'configure' }, true);
+  assert.match(renderPrompt(longSession), /已精简；完整结果见会话记录/);
+  assert.ok([...renderPrompt(longSession)].length <= PROMPT_LIMIT);
+});
